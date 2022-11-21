@@ -1,34 +1,51 @@
 import React from 'react';
-import { useEffect, useState, useContext } from 'react';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { setCategotyId } from '../redux/slices/filterSlice';
+import axios from 'axios';
+import qs from 'qs';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState, useContext, useRef, useCallback } from 'react';
 
 import { SearchContext } from '../App';
 
+import {
+  setCategotyId,
+  setCurrentPage,
+  setFliters,
+} from '../redux/slices/filterSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+import Sort, { sortList } from '../components/Sort/Sort';
 import Categories from '../components/Categories/Categories';
 import Skeleton from '../components/PizzaBlock/Skeleton/Skeleton';
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock';
-import Sort from '../components/Sort/Sort';
-
-import classes from '../scss/app.module.scss';
 import Pagination from '../components/Pagination';
 
+import classes from '../scss/app.module.scss';
+
 const Home = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const categoryId = useSelector((state) => state.filter.categoryId);
-  const sortType = useSelector((state) => state.filter.sort.sortProperty);
+  const isSearch = useRef(false);
+  const isMounted = useRef(false);
+
+  const { categoryId, sort, currentPage } = useSelector(
+    (state) => state.filter
+  );
+  const sortType = sort.sortProperty;
 
   const [items, setItems] = useState([]);
   const { searchValue } = useContext(SearchContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
 
-  const onChangeCategory = (id) => {
-    dispatch(setCategotyId(id));
+  const onChangeCategory = useCallback((idx) => {
+    dispatch(setCategotyId(idx));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const onChangePage = (page) => {
+    dispatch(setCurrentPage(page));
   };
 
-  useEffect(() => {
+  const fetchPiazzas = () => {
     setIsLoading(true);
 
     const sortBy = sortType.replace('-', '');
@@ -36,15 +53,57 @@ const Home = () => {
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    fetch(
-      `https://6363c19237f2167d6f828690.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-    )
-      .then((res) => res.json())
-      .then((arr) => {
-        setItems(arr);
+    axios
+      .get(
+        `https://6363c19237f2167d6f828690.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+      )
+      .then((res) => {
+        setItems(res.data);
         setIsLoading(false);
       });
-  }, [categoryId, sortType, searchValue, currentPage]);
+  };
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortProperty: sort.sortProperty,
+        categoryId,
+        currentPage,
+      });
+
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryId, sort.sortProperty, currentPage]);
+
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+
+      const sort = sortList.find(
+        (obj) => obj.sortProperty === params.sortProperty
+      );
+
+      dispatch(
+        setFliters({
+          ...params,
+          sort,
+        })
+      );
+      isSearch.current = true;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (!isSearch.current) {
+      fetchPiazzas();
+    }
+    isSearch.current = false;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
   return (
     <div>
@@ -58,7 +117,7 @@ const Home = () => {
           ? [...new Array(4)].map((_, index) => <Skeleton key={index} />)
           : items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)}
       </div>
-      <Pagination onChangePage={(number) => setCurrentPage(number)} />
+      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );
 };

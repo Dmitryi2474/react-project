@@ -1,15 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router';
-import GridBlock from '../ui/GridBlock';
 import clsx from 'clsx';
 
 import classes from './Header.module.scss';
+import GridBlock from '../ui/GridBlock';
 import Search from '../Search/Index';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const { pathname } = useLocation();
-
+  const { items, totalPrice } = useSelector((state) => state.cart);
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   return (
     <div className={classes.Header}>
       <GridBlock>
@@ -30,7 +32,7 @@ const Header = () => {
           <Search />
           <div className={classes.Cart}>
             <Link to="/cart" className="button button--cart">
-              <span>520 ₽</span>
+              <span>{totalPrice} ₽</span>
               <div className="button__delimiter"></div>
               <svg
                 width="18"
@@ -61,7 +63,7 @@ const Header = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>3</span>
+              <span>{totalCount}</span>
             </Link>
           </div>
         </div>

@@ -1,13 +1,8 @@
-import { useState } from 'react';
+import React from 'react';
 
 import './Button.scss';
 
-const Button = ({ text }) => {
-  const [PizzaCount, setPizzaCount] = useState(0);
-
-  const onClickAdd = () => {
-    setPizzaCount(PizzaCount + 1);
-  };
+const Button = ({ text, onClickAdd, PizzaCount }) => {
   return (
     <button onClick={onClickAdd} className="button button--outline button--add">
       <svg
