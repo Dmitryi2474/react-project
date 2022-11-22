@@ -4,7 +4,7 @@ import { addItem, minusItem, removeItem } from '../../redux/slices/cartSlice';
 
 import classes from './CartItem.module.scss';
 
-const CartItem = ({ id, title, price, imageUrl, count, types, sizes }) => {
+const CartItem = ({ id, title, price, imageUrl, count, type, size }) => {
   const dispatch = useDispatch();
 
   const onClickPlus = () => {
@@ -33,7 +33,7 @@ const CartItem = ({ id, title, price, imageUrl, count, types, sizes }) => {
       <div className={classes.info}>
         <h3>{title}</h3>
         <p>
-          {types},{sizes} см.
+          {type} , {size}
         </p>
       </div>
       <div className={classes.count}>

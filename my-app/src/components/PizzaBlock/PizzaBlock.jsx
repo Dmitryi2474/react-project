@@ -6,7 +6,7 @@ import { addItem } from '../../redux/slices/cartSlice';
 import '../ui/Button/Button';
 import classes from './PizzaBlock.module.scss';
 
-const typeNames = ['тонкое', 'традиционое'];
+const typeNames = ['128 GB', '512 GB'];
 
 const PizzaBlock = ({ id, title, price, imageUrl, types, sizes }) => {
   const dispatch = useDispatch();
@@ -24,8 +24,8 @@ const PizzaBlock = ({ id, title, price, imageUrl, types, sizes }) => {
       title,
       price,
       imageUrl,
-      types: typeNames[activeType],
-      sizes: sizes[activeSize],
+      type: typeNames[activeType],
+      size: sizes[activeSize],
     };
     dispatch(addItem(item));
   };

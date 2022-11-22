@@ -5,11 +5,11 @@ import classes from './Categories.module.scss';
 const Categories = ({ value, onChangeCategory }) => {
   const categories = [
     'Все',
-    'Мясные',
-    'Вегетарианские',
-    'Гриль',
-    'Острые',
-    'Зактрытые',
+    'Iphone',
+    'Samsung',
+    'Xiaomi',
+    'Honor',
+    'HUAWEI',
   ];
 
   return (

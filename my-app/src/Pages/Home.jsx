@@ -1,8 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState, useContext, useRef, useCallback } from 'react';
+import { useEffect, useContext, useRef, useCallback } from 'react';
 
 import { SearchContext } from '../App';
 
@@ -12,6 +11,7 @@ import {
   setFliters,
 } from '../redux/slices/filterSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchMobile } from '../redux/slices/mobileSlice';
 
 import Sort, { sortList } from '../components/Sort/Sort';
 import Categories from '../components/Categories/Categories';
@@ -32,9 +32,8 @@ const Home = () => {
   );
   const sortType = sort.sortProperty;
 
-  const [items, setItems] = useState([]);
+  const { items, status } = useSelector((state) => state.mobile);
   const { searchValue } = useContext(SearchContext);
-  const [isLoading, setIsLoading] = useState(true);
 
   const onChangeCategory = useCallback((idx) => {
     dispatch(setCategotyId(idx));
@@ -45,22 +44,21 @@ const Home = () => {
     dispatch(setCurrentPage(page));
   };
 
-  const fetchPiazzas = () => {
-    setIsLoading(true);
-
+  const getMobile = async () => {
     const sortBy = sortType.replace('-', '');
     const order = sortType.includes('-') ? 'возрастанию' : 'убыванию';
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    axios
-      .get(
-        `https://6363c19237f2167d6f828690.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-      )
-      .then((res) => {
-        setItems(res.data);
-        setIsLoading(false);
-      });
+    dispatch(
+      fetchMobile({
+        sortBy,
+        order,
+        category,
+        search,
+        currentPage,
+      })
+    );
   };
 
   useEffect(() => {
@@ -98,12 +96,17 @@ const Home = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (!isSearch.current) {
-      fetchPiazzas();
-    }
+
+    getMobile();
+
     isSearch.current = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
+
+  const skeleton = [...new Array(4)].map((_, index) => (
+    <Skeleton key={index} />
+  ));
+  const mobileBlock = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
 
   return (
     <div>
@@ -112,11 +115,17 @@ const Home = () => {
         <Sort />
       </div>
       <h2 className={classes.Title}>Все пиццы</h2>
-      <div className={classes.Items}>
-        {isLoading
-          ? [...new Array(4)].map((_, index) => <Skeleton key={index} />)
-          : items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)}
-      </div>
+      {status === 'error' ? (
+        <div className={classes.Error}>
+          <h2>что-то пошло не так((</h2>
+          <span>попробуйте повторить попытку позже</span>
+        </div>
+      ) : (
+        <div className={classes.Items}>
+          {status === 'loading' ? skeleton : mobileBlock}
+        </div>
+      )}
+
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );
