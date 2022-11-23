@@ -27,19 +27,21 @@ const mobileSlice = createSlice({
   },
   extraReducers: {
     [fetchMobile.pending]: (state) => {
-      state.status = 'loading'
-      state.items = []
+      state.status = 'loading';
+      state.items = [];
     },
     [fetchMobile.fulfilled]: (state, action) => {
-      state.status = 'success'
-      state.items = action.payload
+      state.status = 'success';
+      state.items = action.payload;
     },
     [fetchMobile.rejected]: (state) => {
-      state.status = 'error'
-      state.items = []
-    }
-  }
+      state.status = 'error';
+      state.items = [];
+    },
+  },
 });
+
+export const slectetMobile = (state) => state.mobile;
 
 export const { setItems } = mobileSlice.actions;
 

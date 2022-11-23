@@ -1,0 +1,29 @@
+.content {
+  display: flex;
+
+  .img {
+    max-width: 500px;
+    width: 50%;
+  }
+
+  .textData {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h2 {
+    margin-bottom: 40px;
+  }
+
+  p {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  span {
+    font-size: 24px;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+}

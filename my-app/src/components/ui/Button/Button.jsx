@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Button.scss';
 
-const Button = ({ text, onClickAdd, PizzaCount }) => {
+const Button = ({ text, onClickAdd, MobileCount }) => {
   return (
     <button onClick={onClickAdd} className="button button--outline button--add">
       <svg
@@ -18,7 +18,7 @@ const Button = ({ text, onClickAdd, PizzaCount }) => {
         />
       </svg>
       <span>{text}</span>
-      <i>{PizzaCount}</i>
+      <i>{MobileCount}</i>
     </button>
   );
 };

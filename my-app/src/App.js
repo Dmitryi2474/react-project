@@ -1,31 +1,27 @@
-import React, { createContext, useState } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import Layout from './components/layout/layout';
+import Layout from './components/Layout/layout';
 import GridBlock from './components/ui/GridBlock';
 import Home from './Pages/Home';
 import Cart from './Pages/Cart';
+import MobileData from './Pages/MobileData';
 
 import classes from './scss/app.module.scss';
 
-export const SearchContext = createContext('');
-
 function App() {
-  const [searchValue, setSearchValue] = useState('');
-
   return (
-    <SearchContext.Provider value={{ searchValue, setSearchValue }}>
-      <Layout>
-        <div className={classes.content}>
-          <GridBlock>
-            <Routes>
-              <Route path="/" element={<Home searchValue={searchValue} />} />
-              <Route path="/cart" element={<Cart />} />
-            </Routes>
-          </GridBlock>
-        </div>
-      </Layout>
-    </SearchContext.Provider>
+    <Layout>
+      <div className={classes.content}>
+        <GridBlock>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/mobile/:id" element={<MobileData />} />
+          </Routes>
+        </GridBlock>
+      </div>
+    </Layout>
   );
 }
 

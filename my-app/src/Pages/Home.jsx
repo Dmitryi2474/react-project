@@ -1,22 +1,21 @@
 import React from 'react';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useContext, useRef, useCallback } from 'react';
-
-import { SearchContext } from '../App';
+import { useEffect, useRef, useCallback } from 'react';
 
 import {
   setCategotyId,
   setCurrentPage,
   setFliters,
+  slectetFilter,
 } from '../redux/slices/filterSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMobile } from '../redux/slices/mobileSlice';
+import { fetchMobile, slectetMobile } from '../redux/slices/mobileSlice';
 
 import Sort, { sortList } from '../components/Sort/Sort';
 import Categories from '../components/Categories/Categories';
-import Skeleton from '../components/PizzaBlock/Skeleton/Skeleton';
-import PizzaBlock from '../components/PizzaBlock/PizzaBlock';
+import Skeleton from '../components/MobileBlock/Skeleton/Skeleton';
+import MobileBlock from '../components/MobileBlock/MobileBlock';
 import Pagination from '../components/Pagination';
 
 import classes from '../scss/app.module.scss';
@@ -27,13 +26,11 @@ const Home = () => {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const { categoryId, sort, currentPage } = useSelector(
-    (state) => state.filter
-  );
+  const { categoryId, sort, currentPage, searchValue } =
+    useSelector(slectetFilter);
   const sortType = sort.sortProperty;
 
-  const { items, status } = useSelector((state) => state.mobile);
-  const { searchValue } = useContext(SearchContext);
+  const { items, status } = useSelector(slectetMobile);
 
   const onChangeCategory = useCallback((idx) => {
     dispatch(setCategotyId(idx));
@@ -96,9 +93,7 @@ const Home = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-
     getMobile();
-
     isSearch.current = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
@@ -106,7 +101,7 @@ const Home = () => {
   const skeleton = [...new Array(4)].map((_, index) => (
     <Skeleton key={index} />
   ));
-  const mobileBlock = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
+  const mobileBlock = items.map((obj) => <MobileBlock {...obj} />);
 
   return (
     <div>
@@ -114,7 +109,7 @@ const Home = () => {
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
         <Sort />
       </div>
-      <h2 className={classes.Title}>Все пиццы</h2>
+      <h2 className={classes.Title}>Все смартфоны</h2>
       {status === 'error' ? (
         <div className={classes.Error}>
           <h2>что-то пошло не так((</h2>
