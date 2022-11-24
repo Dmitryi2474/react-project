@@ -1,4 +1,3 @@
-import React from 'react';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useCallback } from 'react';
@@ -101,7 +100,7 @@ const Home = () => {
   const skeleton = [...new Array(4)].map((_, index) => (
     <Skeleton key={index} />
   ));
-  const mobileBlock = items.map((obj) => <MobileBlock {...obj} />);
+  const mobileBlock = items.map((obj) => <MobileBlock key={obj.id} {...obj} />);
 
   return (
     <div>
