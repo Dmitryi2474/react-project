@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addItem, selectCartItemById } from '../../redux/slices/cartSlice';
+import { addItem, CartItem, selectCartItemById } from '../../redux/slices/cartSlice';
 
 import '../ui/Button/Button';
 import classes from './MobileBlock.module.scss';
@@ -19,13 +19,14 @@ const MobileBlock: React.FC<MobileBlockProps> = ({ id, title, price, imageUrl, t
   const addedCount = cartItem ? cartItem.count : 0;
 
   const onClickAdd = () => {
-    const item = {
+    const item: CartItem = {
       id,
       title,
       price,
       imageUrl,
       type: typeNames[activeType],
       colors: color[activeColor],
+      count: 0,
     };
     dispatch(addItem(item));
   };

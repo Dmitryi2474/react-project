@@ -5,20 +5,20 @@ import classes from './Pagination.module.scss';
 
 type PaginationProps = {
   currentPage: number
-  onChangePage: any
+  onChangePage: (page: number) => void
 }
 
-const Pagination: React.FC <PaginationProps> = ({ currentPage, onChangePage }) => {
+const Pagination: React.FC<PaginationProps> = ({ currentPage, onChangePage }) => {
   return (
     <ReactPaginate
       className={classes.root}
       breakLabel="..."
       nextLabel=">"
       previousLabel="<"
-      onPageChange={(event) => onChangePage(event.selected +1)}
+      onPageChange={(event) => onChangePage(event.selected + 1)}
       pageRangeDisplayed={4}
       pageCount={4}
-      forcePage={currentPage -1}
+      forcePage={currentPage - 1}
     />
   );
 };

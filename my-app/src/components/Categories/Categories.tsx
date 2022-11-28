@@ -4,7 +4,7 @@ import classes from './Categories.module.scss';
 
 type CategoriesProps = {
   value: number;
-  onChangeCategory: any
+  onChangeCategory: (idx: number) => void
 }
 
 const Categories: React.FC<CategoriesProps> = ({ value, onChangeCategory }) => {

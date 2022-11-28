@@ -21,7 +21,7 @@
     span {
       min-width: 130px;
       text-align: center;
-      color: $orange;
+      color: cornflowerblue;
       border-bottom: 1px dashed $orange;
       cursor: pointer;
     }
@@ -52,7 +52,7 @@
 
         &.active {
           font-weight: bold;
-          color: $orange;
+          color: cornflowerblue;
         }
       }
     }
