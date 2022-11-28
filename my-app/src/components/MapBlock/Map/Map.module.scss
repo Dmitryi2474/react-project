@@ -1,0 +1,43 @@
+@import '../../../scss/variables';
+
+
+.Map {
+    height: 200px;
+    margin: 0 -20px 0;
+  
+    @media (min-width: $media480) {
+      height: 300px;
+    }
+  
+    @media (min-width: $media768) {
+      height: 350px;
+      margin: 0 -40px;
+    }
+  
+    @media (min-width: $media1024) {
+      width: 600px;
+      margin: 0;
+    }
+  
+    @media (min-width: $media1200) {
+      max-width: 800px;
+      height: 450px;
+      flex: 1 1 auto;
+      margin: 0%;
+    }
+  
+    .Marker {
+      width: 33px;
+      height: 40px;
+      background-image: url('../../../../public/img/Vector8.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+  
+      @media (min-width: $media1024) {
+        width: 45px;
+        height: 55px;
+      }
+    }
+  }
+  

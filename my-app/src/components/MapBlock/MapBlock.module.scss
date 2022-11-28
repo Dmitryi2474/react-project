@@ -1,0 +1,57 @@
+@import '../../scss/variables';
+
+.MapBlock {
+  padding: 20px 0 33px;
+
+  @media (min-width: $media768) {
+    padding: 40px 0;
+  }
+
+  @media (min-width: $media1024) {
+    padding: 60px 0;
+  }
+
+  .Wrapper {
+    @media (min-width: $media1024) {
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+
+  .Addresses {
+    @media (min-width: $media1024) {
+      width: 335px;
+      margin-right: 45px;
+    }
+  }
+
+  .Buttons {
+    margin: 30px auto 0 auto;
+    text-align: center;
+
+    @media (min-width: $media1024) {
+      margin: -30px 0 0 0;
+      text-align: left;
+    }
+  }
+
+  .title {
+    margin-bottom: 30px;
+    text-align: center;
+
+    @media (min-width: $media1024) {
+      margin-bottom: 40px;
+    }
+  }
+
+  .Img1 {
+    position: absolute;
+    width: 150px;
+    top: 250px;
+
+    @media (min-width: $media1024) {
+      width: 200px;
+      top: 160px;
+    }
+  }
+}

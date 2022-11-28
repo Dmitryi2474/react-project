@@ -4,8 +4,12 @@
 @import 'components/all';
 
 body {
-  background: rgb(151,32,255);
-  background: radial-gradient(circle, rgba(151,32,255,1) 75%, rgba(255,255,255,1) 100%);
+  background: rgb(151, 32, 255);
+  background: radial-gradient(
+    circle,
+    rgba(151, 32, 255, 1) 75%,
+    rgba(255, 255, 255, 1) 100%
+  );
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   color: $black;
@@ -73,23 +77,28 @@ a {
   }
 
   .Items {
+    padding-top: 30px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(1, 1fr);
-    grid-column-gap: 11px;
+    grid-column-gap: 20px;
     grid-row-gap: 20px;
-    justify-content: center;
 
     @media (max-width: 1400px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
+      overflow-x: scroll;
 
-    @media (max-width: 1200px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
+      &::-webkit-scrollbar {
+        height: 2px;
+        width: 7px !important;
+      }
 
-    @media (max-width: 768px) {
-      grid-template-columns: repeat(1, 1fr);
+      ::-webkit-scrollbar {
+        width: 15px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: black;
+      }
     }
   }
 

@@ -18,6 +18,7 @@ import MobileBlock from '../components/MobileBlock/MobileBlock';
 import Pagination from '../components/Pagination';
 
 import classes from '../scss/app.module.scss';
+import MapBlock from '../components/MapBlock/MapBlock';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -120,8 +121,8 @@ const Home: React.FC = () => {
           {status === 'loading' ? skeleton : mobileBlock}
         </div>
       )}
-
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+      <MapBlock/>
     </div>
   );
 };
