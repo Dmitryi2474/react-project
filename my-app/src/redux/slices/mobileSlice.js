@@ -12,7 +12,6 @@ export const fetchMobile = createAsyncThunk(
   }
 );
 
-
 const initialState = {
   items: [],
   status: 'loading',

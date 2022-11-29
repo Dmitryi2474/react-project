@@ -1,19 +1,18 @@
-import classes from './MapBlock.module.scss';
-import React, { useState } from 'react';
 import LocationList from './Locations/LocationList';
 import Map from './Map/Map';
+import { useSelector } from 'react-redux';
+import { selectMapLocation } from '../../redux/slices/mapSlice';
+
+import classes from './MapBlock.module.scss';
 
 const MapBlock = () => {
-  const [mapLocation, setMapLocation] = useState({
-    lat: 53.54167,
-    lng: 49.39048,
-  });
+  const mapLocation = useSelector(selectMapLocation);
 
   return (
     <div className={classes.MapBlock}>
       <h2 className={classes.title}>Посетите наши магазины</h2>
       <div className={classes.Wrapper}>
-        <LocationList locationHandler={setMapLocation} />
+        <LocationList />
         <Map mapLocation={mapLocation} />
       </div>
     </div>
