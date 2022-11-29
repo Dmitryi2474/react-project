@@ -2,14 +2,14 @@
 
 .Header {
   border-bottom: 1px solid $gray-line;
-  padding: 40px 0;
+  padding: 40px 0 20px;
 
   .Container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
 
-    @media(max-width: 768px) {
+    @media (max-width: 768px) {
       flex-direction: column;
     }
   }
@@ -18,7 +18,7 @@
     display: flex;
     transition: 0.4s;
 
-    @media(max-width: 768px) {
+    @media (max-width: 768px) {
       margin-bottom: 30px;
     }
 
@@ -47,6 +47,30 @@
 
     p {
       color: #7b7b7b;
+    }
+  }
+
+  .Cart {
+    text-align: center;
+    a {
+      border-bottom: 1px dashed #fe5f1e;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .phone {
+      font-weight: bold;
+      padding-left: 10px;
+      padding-top: 10px;
+      transition: 0.4s;
+
+      &:hover {
+        color: blue;
+      }
     }
   }
 }

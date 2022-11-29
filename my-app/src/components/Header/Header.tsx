@@ -67,6 +67,10 @@ const Header = () => {
                 </svg>
                 <span>{totalCount}</span>
               </Link>
+              <div>
+                <img src="../../../img/phone.png" alt="" />
+                <a className={classes.phone} href="tel: 8-800-600-7775">8-800-600-7775</a>
+              </div>
             </div>
           )}
         </div>

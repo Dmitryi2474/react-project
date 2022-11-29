@@ -85,20 +85,11 @@ a {
     grid-row-gap: 20px;
 
     @media (max-width: 1400px) {
-      overflow-x: scroll;
+      grid-template-columns: repeat(3, 1fr);
+    }
 
-      &::-webkit-scrollbar {
-        height: 2px;
-        width: 7px !important;
-      }
-
-      ::-webkit-scrollbar {
-        width: 15px;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: black;
-      }
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 

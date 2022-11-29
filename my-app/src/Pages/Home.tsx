@@ -93,7 +93,6 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     getMobile();
     isSearch.current = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -117,13 +116,16 @@ const Home: React.FC = () => {
           <span>попробуйте повторить попытку позже</span>
         </div>
       ) : (
+
         <div className={classes.Items}>
-          {status === 'loading' ? skeleton : mobileBlock}
+            {status === 'loading' ? skeleton : mobileBlock}
         </div>
-      )}
+
+      )
+      }
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
-      <MapBlock/>
-    </div>
+      <MapBlock />
+    </div >
   );
 };
 
