@@ -16,7 +16,7 @@ const LocationList = () => {
   const locations = [
     {
       city: 'Тольятти',
-      address: 'Автозаводское ш, 6, 1 Этаж',
+      address: 'Парк Хаус, Автозаводское ш, 6, 1 Этаж',
       tel: 'тел: 8 (848) 242-18-88',
       hours: '10:00 22:00',
       mapLocation: {
@@ -27,7 +27,7 @@ const LocationList = () => {
 
     {
       city: 'Тольятти',
-      address: 'Революционная ул, 52А, 2 Этаж',
+      address: 'Русь, Революционная ул, 52А, 2 Этаж',
       tel: 'тел: 8 (848) 242-18-88',
       hours: '10:00 22:00',
       mapLocation: {
@@ -38,7 +38,7 @@ const LocationList = () => {
 
     {
       city: 'Тольятти',
-      address: 'Дзержинского ул, 21, 3 Этаж',
+      address: 'Капитал Дзержинского ул, 21, 3 Этаж',
       tel: 'тел: 8 (848) 242-18-88',
       hours: '10:00 22:00',
       mapLocation: {

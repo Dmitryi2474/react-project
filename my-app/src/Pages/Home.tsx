@@ -16,9 +16,11 @@ import Categories from '../components/Categories/Categories';
 import Skeleton from '../components/MobileBlock/Skeleton/Skeleton';
 import MobileBlock from '../components/MobileBlock/MobileBlock';
 import Pagination from '../components/Pagination';
+import MapBlock from '../components/MapBlock/MapBlock';
+import Contact from '../components/Form/Form';
 
 import classes from '../scss/app.module.scss';
-import MapBlock from '../components/MapBlock/MapBlock';
+
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -118,13 +120,14 @@ const Home: React.FC = () => {
       ) : (
 
         <div className={classes.Items}>
-            {status === 'loading' ? skeleton : mobileBlock}
+          {status === 'loading' ? skeleton : mobileBlock}
         </div>
 
       )
       }
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
       <MapBlock />
+      <Contact/>
     </div >
   );
 };

@@ -1,0 +1,138 @@
+.Contact {
+  background: linear-gradient(234.5deg, #f84444 1.91%, #f5a623 100%);
+  padding: 97px 0 66px;
+  border-radius: 10px;
+
+  .Wrapper {
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+
+  .Title {
+    margin: 0 50px;
+    color: white;
+
+    @media (min-width: 768px) {
+      width: 41%;
+      margin-right: 60px;
+    }
+
+    @media (min-width: 1200px) {
+      margin-right: 115px;
+    }
+  }
+
+  .Form {
+    @media (min-width: 768px) {
+      width: 32%;
+    }
+  }
+
+  .Email {
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    padding: 18px 0 18px 30px;
+    margin-bottom: 15px;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .Name {
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    padding: 18px 0 18px 30px;
+    margin-bottom: 15px;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .Message {
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    padding: 18px 0 0 30px;
+    margin-bottom: 15px;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .Btn {
+    margin-bottom: 20px;
+  }
+
+  .Control {
+    position: relative;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: 1;
+      left: 10px;
+      top: 19px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .Name {
+      &::before {
+        // background-image: url('../../../public/img/Contact/name.svg');
+        background-repeat: no-repeat;
+      }
+    }
+  }
+
+  .recaptcha {
+    font-size: 13px;
+
+    .link {
+      text-decoration: underline;
+      color: black;
+    }
+  }
+
+  .Control {
+    position: relative;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: 1;
+      left: 10px;
+      top: 19px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .FieldName {
+    .Control {
+      &::before {
+        // background-image: url('../../../public/img/Contact/name.svg');
+        background-repeat: no-repeat;
+      }
+    }
+  }
+
+  .Field-email {
+    .Control {
+      &::before {
+        // background-image: url('../../../public/img/Contact/email.svg');
+        background-repeat: no-repeat;
+      }
+    }
+  }
+
+  .Field-message {
+    .Control {
+      &::before {
+        // background-image: url('../../../public/img/Contact/message.svg');
+        background-repeat: no-repeat;
+      }
+    }
+  }
+}
